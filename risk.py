@@ -94,3 +94,30 @@ def get_winner(attacker_rolls, defender_rolls):
 
     # If all dice are equal, the defender wins.
     return "defender"
+
+
+bonuses = {
+    'brown': 7,
+    'red': 7,
+    'green': 5,
+    'blue': 4,
+    'yellow': 3,
+    'beige N': 5,
+    'beige S': 2,
+    'grey N': 2,
+    'grey S': 2,
+}
+
+def get_troops(n_territories, groups = []):
+    if n_territories < 11:
+        base = 3
+    elif n_territories < 63:
+        f = lambda x: int((x - 9) / 3) + 3
+        base = f(n_territories)
+    else:
+        base = 21
+
+    for group in groups:
+        base += bonuses[group]
+
+    return base
